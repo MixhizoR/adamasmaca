@@ -1,17 +1,26 @@
 def main():
+    print("This is hangman game!")
+    print("You are starting with selecting a word to other's guess")
+    print("If you cannot guess the word in 8 tries, you lose")
+    print("You can only enter a letter or guess the full word")
     while True:
         guessedLetters = []
+        guesses = 8
         word = input("Enter the word: ").lower()
         if not word.replace(' ','').isalpha():
             print("Please enter a word")
             continue
-        guesses = int(len(word)/2)
         while(guesses > 0):
             printWord(word, guessedLetters)
             print(f"Guessed letters are: {guessedLetters}")
             print(f"You have {guesses} guesses left")
             guessedLetter = input("Guess a letter: ").lower()
-            if len(guessedLetter) > 1 or not guessedLetter.isalpha():
+            if guessedLetter == word:
+                printWord(word, guessedLetters)
+                print("Congrats! You won.")
+                print(f"The word is: {word}")
+                break
+            elif len(guessedLetter) > 1 or not guessedLetter.isalpha():
                 print("Please enter a letter")
             elif guessedLetter in guessedLetters:
                 print("Please enter a word that has not been entered")
